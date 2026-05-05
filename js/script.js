@@ -83,12 +83,14 @@ function ensureSummaryUI() {
       role: "dialog",
       ariaModal: "true",
       ariaLabel: "Summary",
+      id: "summaryPanel",
     });
 
     const header = document.createElement("header");
     const h3 = el("h3", { text: "Summary" });
 
     const actions = el("div", { className: "summary-actions" });
+
     const resetBtn = el("button", {
       className: "close-btn danger",
       type: "button",
@@ -96,12 +98,7 @@ function ensureSummaryUI() {
       dataset: { reset: "1" },
     });
 
-    const printBtn = el("button", {
-      className: "close-btn",
-      type: "button",
-      text: "Print / PDF",
-      dataset: { print: "1" },
-    });
+    // PDF button removed as requested
 
     const closeBtn = el("button", {
       className: "close-btn",
@@ -111,15 +108,12 @@ function ensureSummaryUI() {
     });
 
     actions.appendChild(resetBtn);
-    actions.appendChild(printBtn);
     actions.appendChild(closeBtn);
 
     header.appendChild(h3);
     header.appendChild(actions);
 
     const content = el("div", { className: "content" });
-
-    // Table layout for Summary (print-friendly)
     const tableWrap = el("div", { className: "summary-table-wrap" });
 
     const table = el("table", { className: "summary-table" });
@@ -172,9 +166,13 @@ function ensureSummaryUI() {
     for (const [name, r] of entries) {
       const badgeClass = r.status || "na";
       const badgeLabel =
-        badgeClass === "low" ? "Low" :
-          badgeClass === "high" ? "High" :
-            badgeClass === "normal" ? "Normal" : "N/A";
+        badgeClass === "low"
+          ? "Low"
+          : badgeClass === "high"
+            ? "High"
+            : badgeClass === "normal"
+              ? "Normal"
+              : "N/A";
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
@@ -194,10 +192,8 @@ function ensureSummaryUI() {
   }
 
   function resetAll() {
-    // clear stored results
     cellResults.clear();
 
-    // clear UI on each card
     document.querySelectorAll(".cell-card").forEach((card) => {
       const input = card.querySelector("input");
       const result = card.querySelector(".diagnosis-result");
@@ -212,12 +208,6 @@ function ensureSummaryUI() {
     renderSummaryList();
   }
 
-  function printSummary() {
-    renderSummaryList();         // ensure latest rows
-    modal.classList.add("open"); // ensure visible for print
-    window.print();
-  }
-
   fab.addEventListener("click", openModal);
 
   modal.addEventListener("click", (e) => {
@@ -225,7 +215,6 @@ function ensureSummaryUI() {
     if (!(t instanceof HTMLElement)) return;
     if (t.dataset.close) closeModal();
     if (t.dataset.reset) resetAll();
-    if (t.dataset.print) printSummary();
   });
 
   document.addEventListener("keydown", (e) => {
@@ -311,7 +300,6 @@ function addCellCard(cellConfig) {
     resultDiv.appendChild(always);
   }
 
-  // Update label and units on select change
   select.addEventListener("change", function () {
     const cfg = getModeConfig();
 
@@ -323,7 +311,6 @@ function addCellCard(cellConfig) {
     resetResult();
   });
 
-  // Initialize
   select.dispatchEvent(new Event("change"));
 
   button.addEventListener("click", function () {
@@ -333,7 +320,6 @@ function addCellCard(cellConfig) {
 
     resetResult();
 
-    // Invalid input
     if (Number.isNaN(val)) {
       resultDiv.style.display = "block";
       resultDiv.classList.add("diagnosis-fail");
@@ -351,7 +337,6 @@ function addCellCard(cellConfig) {
       return;
     }
 
-    // No config
     if (!cfg || typeof cfg.min !== "number" || typeof cfg.max !== "number") {
       resultDiv.style.display = "block";
       resultDiv.classList.add("diagnosis-normal");
@@ -392,9 +377,13 @@ function addCellCard(cellConfig) {
     }
 
     const status =
-      statusClass === "diagnosis-low" ? "low" :
-        statusClass === "diagnosis-high" ? "high" :
-          statusClass === "diagnosis-normal" ? "normal" : "na";
+      statusClass === "diagnosis-low"
+        ? "low"
+        : statusClass === "diagnosis-high"
+          ? "high"
+          : statusClass === "diagnosis-normal"
+            ? "normal"
+            : "na";
 
     cellResults.set(name, {
       status,
@@ -564,10 +553,12 @@ if (feedbackForm) {
       "----",
       name ? `From: ${name}` : "",
       `Page: ${location.href}`,
-      `Date: ${new Date().toLocaleString()}`
+      `Date: ${new Date().toLocaleString()}`,
     ].filter(Boolean);
 
-    const mailto = `mailto:${encodeURIComponent(FEEDBACK_TO_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    const mailto = `mailto:${encodeURIComponent(
+      FEEDBACK_TO_EMAIL
+    )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
     window.location.href = mailto;
   });
 }

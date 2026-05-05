@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cell Reference</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="./js/script.js" type="module"></script>
-</head>
 
-<body>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!-- PDF library removed (Download PDF button removed) -->
+    <script src="./js/script.js" type="module"></script>
+  </head>
+
+  <body>
     <header>
-        <h1>Cell Reference</h1>
+      <h1>Cell Reference</h1>
     </header>
 
     <main>
-        <div class="card-list"></div>
+      <div class="card-list"></div>
     </main>
 
     <footer class="site-footer">
-        <section class="feedback-card" aria-label="Feedback">
-            <div class="feedback-head">
-                <h2>Send feedback</h2>
-                <p>Tell us what to improve. This will open your email app.</p>
+      <section class="feedback-card" aria-label="Feedback">
+        <div class="feedback-head">
+          <h2>Send feedback</h2>
+          <p>Tell us what to improve. This will open your email app.</p>
+        </div>
+
+        <form id="feedbackForm" class="feedback-form">
+          <div class="feedback-grid">
+            <div class="field">
+              <label for="fbName">Name (optional)</label>
+              <input id="fbName" type="text" placeholder="Your name" />
             </div>
 
-            <form id="feedbackForm" class="feedback-form">
-                <div class="feedback-grid">
-                    <div class="field">
-                        <label for="fbName">Name (optional)</label>
-                        <input id="fbName" type="text" placeholder="Your name" />
-                    </div>
+            <div class="field">
+              <label for="fbSubject">Subject</label>
+              <input id="fbSubject" type="text" value="Cell Reference Feedback" />
+            </div>
+          </div>
 
-                    <div class="field">
-                        <label for="fbSubject">Subject</label>
-                        <input id="fbSubject" type="text" value="Cell Reference Feedback" />
-                    </div>
-                </div>
+          <div class="field">
+            <label for="fbMessage">Message</label>
+            <textarea
+              id="fbMessage"
+              rows="5"
+              placeholder="Write your feedback..."
+              required
+            ></textarea>
+          </div>
 
-                <div class="field">
-                    <label for="fbMessage">Message</label>
-                    <textarea id="fbMessage" rows="5" placeholder="Write your feedback..." required></textarea>
-                </div>
+          <div class="feedback-actions">
+            <button type="submit" class="btn-primary">Open Email</button>
+            <a
+              class="btn-ghost"
+              href="mailto:artmanlangit@up.edu.ph?subject=Cell%20Reference%20Feedback"
+              >Use my email app</a
+            >
+          </div>
 
-                <div class="feedback-actions">
-                    <button type="submit" class="btn-primary">Open Email</button>
-                    <a class="btn-ghost" href="mailto:artmanlangit@up.edu.ph?subject=Cell%20Reference%20Feedback">Use my
-                        email app</a>
-                </div>
-
-                <div class="feedback-note">
-                    Tip: If no email app opens, copy your message and email <b>artmanlangit@up.edu.ph</b>.
-                </div>
-            </form>
-        </section>
+          <div class="feedback-note">
+            Tip: If no email app opens, copy your message and email
+            <b>artmanlangit@up.edu.ph</b>.
+          </div>
+        </form>
+      </section>
     </footer>
-</body>
-
+  </body>
 </html>
