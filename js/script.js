@@ -534,7 +534,7 @@ addCellCard({
 
 ensureSummaryUI();
 
-const FEEDBACK_TO_EMAIL = "youremail@example.com";
+const FEEDBACK_TO_EMAIL = "artmanlangit@up.edu.ph";
 
 const feedbackForm = document.getElementById("feedbackForm");
 if (feedbackForm) {
