@@ -339,26 +339,30 @@ main {
     overflow: auto;
 }
 
-.summary-list {
-    display: grid;
-    gap: 0.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+/* Table-style Summary (print-friendly) */
+.summary-table-wrap {
+    width: 100%;
+    overflow: auto;
 }
 
-.summary-item {
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.summary-table th,
+.summary-table td {
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.75rem 0.85rem;
-    background: #fff;
+    padding: 0.65rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
 }
 
-.summary-item .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.75rem;
-    align-items: baseline;
+.summary-table thead th {
+    background: #f9fafb;
+    color: #111827;
+    font-weight: 700;
 }
 
 .badge {
@@ -368,6 +372,7 @@ main {
     border: 1px solid var(--border);
     color: var(--muted);
     background: #fff;
+    white-space: nowrap;
 }
 
 .badge.low {
@@ -388,12 +393,6 @@ main {
 .badge.na {
     color: var(--muted);
     background: #fff;
-}
-
-.summary-item .meta {
-    margin-top: 0.35rem;
-    color: var(--muted);
-    font-size: 0.9rem;
 }
 
 .site-footer {
@@ -525,4 +524,28 @@ main {
 .feedback-form input,
 .feedback-form textarea {
     font-size: 16px;
+}
+
+/* PRINT: only print the summary panel/table */
+.summary-modal .content {
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.summary-table-wrap {
+    overflow: visible !important;
+}
+
+/* Avoid page breaks caused by row splitting / layout quirks */
+.summary-table,
+.summary-table tr,
+.summary-table td,
+.summary-table th {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
+/* Also remove any leftover spacing that could force extra pages */
+@page {
+    margin: 12mm;
 }
