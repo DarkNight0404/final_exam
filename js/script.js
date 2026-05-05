@@ -98,8 +98,6 @@ function ensureSummaryUI() {
       dataset: { reset: "1" },
     });
 
-    // PDF button removed as requested
-
     const closeBtn = el("button", {
       className: "close-btn",
       type: "button",
@@ -117,11 +115,11 @@ function ensureSummaryUI() {
     const tableWrap = el("div", { className: "summary-table-wrap" });
 
     const table = el("table", { className: "summary-table" });
+    // Type column removed
     table.innerHTML = `
       <thead>
         <tr>
           <th>Cell</th>
-          <th>Type</th>
           <th>Entered</th>
           <th>Normal Range</th>
           <th>Status</th>
@@ -155,8 +153,8 @@ function ensureSummaryUI() {
     if (entries.length === 0) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td colspan="5" style="color:#6b7280; padding:12px;">
-          No entries yet. Enter values on the cards and press Determine to generate a summary.
+        <td colspan="4" style="color:#6b7280; padding:12px;">
+          No entries yet.
         </td>
       `;
       tbody.appendChild(tr);
@@ -175,9 +173,9 @@ function ensureSummaryUI() {
               : "N/A";
 
       const tr = document.createElement("tr");
+      // Type column removed
       tr.innerHTML = `
         <td><b>${escapeHtml(name)}</b></td>
-        <td>${escapeHtml(r.typeLabel || "")}</td>
         <td>${escapeHtml(r.enteredText || "—")}</td>
         <td>${escapeHtml(r.normalText || "—")}</td>
         <td><span class="badge ${badgeClass}">${badgeLabel}</span></td>

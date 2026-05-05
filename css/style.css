@@ -144,7 +144,7 @@ main {
 
 .inline-row input {
   flex: 1 1 auto;
-  min-width: 0; /* prevents overflow on small screens */
+  min-width: 0;
 }
 
 .unit-span {
@@ -338,26 +338,27 @@ main {
   overflow: auto;
 }
 
-/* ===== Summary table (keep table layout + horizontal scroll on phones) ===== */
+/* ===== Summary table (smaller + no horizontal scroll; Type column removed) ===== */
 .summary-table-wrap {
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 
 .summary-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
-  min-width: 720px; /* forces horizontal scroll on narrow screens */
+  font-size: 0.92rem;
+  min-width: 0;
+  table-layout: fixed;
 }
 
 .summary-table th,
 .summary-table td {
   border: 1px solid var(--border);
-  padding: 0.65rem 0.7rem;
+  padding: 0.55rem 0.6rem;
   text-align: left;
   vertical-align: top;
+  word-break: break-word;
 }
 
 .summary-table thead th {
@@ -366,9 +367,29 @@ main {
   font-weight: 700;
 }
 
+/* Keep badge readable */
 .summary-table td:last-child,
 .summary-table th:last-child {
   white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .summary-modal .panel {
+    margin: 8vh auto 0;
+  }
+
+  .summary-modal .content {
+    padding: 0.75rem;
+  }
+
+  .summary-table {
+    font-size: 0.88rem;
+  }
+
+  .summary-table th,
+  .summary-table td {
+    padding: 0.5rem 0.55rem;
+  }
 }
 
 .badge {
@@ -525,7 +546,6 @@ main {
   padding-top: 0.75rem;
 }
 
-/* Prevent iOS zoom */
 .cell-form input[type="text"],
 .cell-form select,
 .feedback-form input,
@@ -533,7 +553,7 @@ main {
   font-size: 16px;
 }
 
-/* ===== Print rules (don’t break mobile horizontal scroll) ===== */
+/* ===== Print rules ===== */
 @media print {
   .summary-modal .content {
     max-height: none !important;
